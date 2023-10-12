@@ -90,6 +90,17 @@ let fBird = {
 let birdVelocity = 0;
 let birdGravity = 0.1;
 
+function birdJump(event) {
+    if (event.key === " " || event.key === "ArrowUp") {
+        birdVelocity = -3.8;
+         
+        if (gameOver === true) {
+           fBird.y = fBirdY;
+           pipesArray = [];
+           gameOver = false;
+        }
+    }
+}
 
 //Pipes
 let pipesArray = [];
@@ -151,9 +162,9 @@ let floor = {
 //skybox
 
 
-window.addEventListener("load", function() {
+window.onload = function() {
     //Drawing the background
-    bgImage = this.document.getElementById("bgImage");
+    bgImage = document.getElementById("bgImage");
     bgImage.width = bgImageWidth;
     bgImage.height = bgImageHeight;
     context = bgImage.getContext("2d");
@@ -183,21 +194,10 @@ window.addEventListener("load", function() {
     
     setInterval(createPipes, 900);
 
-    document.addEventListener("keydown", function birdJump(event) {
-        if (event.key === " " || event.key === "ArrowUp") {
-            birdVelocity = -3.8;
+    document.addEventListener("keydown", birdJump);
 
-            if (gameOver === true) {
-                fBird.y = fBirdY;
-                pipesArray = [];
-                gameOver = false;
-            }
-        }
-
-    });
-
-
-});
+    //this.document.addEventListener("keydown", resetGame);
+};
 
 function animate() {
     if (gameOver === true) {
@@ -227,6 +227,7 @@ function animate() {
     if (collision(fBird, floor)) {
         gameOver = true;
     }
+    
 }
 
 function collision(a, b) {
@@ -236,3 +237,11 @@ function collision(a, b) {
             b.y < a.height + a.y;
 }
 
+/*function resetGame(event) {
+    if (event.key === " ") {
+            fBird.y = fBirdY;
+            pipesArray = [];
+            gameOver = false;
+    }
+    
+}*/
