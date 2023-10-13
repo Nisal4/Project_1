@@ -1,38 +1,3 @@
-//Create a start button and start screen
-
-
-//The game should accept either a mouse click or spacebar click (undecided) to make flappy bird fly
-//"flappy bird" should have physics properties and will begin falling 1-2 seconds after the game starts, if no input is detected.
-//When the code detects a click it will make flappy bird "fly". The flight height will also have to be set.
-//"flappy bird" will not move horizontally, it will only move vertically.
-
-
-//The hard part is the pipes, the pipes will have to be a solid object with collision detection everywhere except the center gap.
-//The pipes will also have to repeat at a set distance from the last, and will have to reposition so the opening is higher or lower than the last.
-//Pipe gap will also remain constant.
-//The pipes will also move horizontally from the right side of the screen to the left at a smooth pace.
-
-
-//Alternatively, if the gap, for whatever reason, also has collision then the pipe will be split into 2 units. (Top and Bottom).
-//Will potentially have to use javascript to duplicate and change verticality of the pipes, and use css to stretch the length of the pipe.
-//Gap height will still remain constant.
-
-//Code a floor, the floor should also have collision.
-
-
-//Code a counter at the top of the screen, this will begin at 0.
-//The counter will detect when flappy bird passes through a pipe, when this happens the counter will increase by 1.
-
-//When collision occurs, a message should appear saying `You lose! Final score: ${counter score}`.
-//Message should contain a retry button that will reset the counter and the rest of the game.
-//Make sure game only begins again once the start button is pressed.
-
-
-//Start button and retry button are low priority, get game done first.
-
-
-
-
 //Set background img
 
 //Set img and position for "flappy bird"
@@ -74,6 +39,7 @@ let context;
 
 let gameOver = false;
 
+
 //flappy bird
 let fBirdWidth = 34;
 let fBirdHeight = 24;
@@ -93,12 +59,6 @@ let birdGravity = 0.1;
 function birdJump(event) {
     if (event.key === " " || event.key === "ArrowUp") {
         birdVelocity = -3.8;
-         
-        if (gameOver === true) {
-           fBird.y = fBirdY;
-           pipesArray = [];
-           gameOver = false;
-        }
     }
 }
 
@@ -132,7 +92,7 @@ function createPipes() {
     let bottomPipe = {
         img : bottomPipeImg,
         x : pipeX,
-        y : changePipe + pipeHeight + (bgImage.height/4.5),
+        y : changePipe + pipeHeight + (bgImage.height/4.8), //making the divisor bigger makes the gap smaller
         width : pipeWidth,
         height : pipeHeight,
         point : false
@@ -196,7 +156,8 @@ window.onload = function() {
 
     document.addEventListener("keydown", birdJump);
 
-    //this.document.addEventListener("keydown", resetGame);
+    document.addEventListener("click", resetGame);
+
 };
 
 function animate() {
@@ -237,11 +198,11 @@ function collision(a, b) {
             b.y < a.height + a.y;
 }
 
-/*function resetGame(event) {
-    if (event.key === " ") {
-            fBird.y = fBirdY;
-            pipesArray = [];
-            gameOver = false;
+function resetGame() {
+    if (gameOver === true) {
+        fBird.y = fBirdY;
+        pipesArray = [];
+        gameOver = false;
+        requestAnimationFrame(animate);
     }
-    
-}*/
+}
