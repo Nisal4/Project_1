@@ -37,8 +37,10 @@ let bgImageWidth = 288;
 let bgImageHeight = 512; 
 let context;
 
+//game details
 let gameOver = false;
 
+let score = 0;
 
 //flappy bird
 let fBirdWidth = 34;
@@ -94,8 +96,7 @@ function createPipes() {
         x : pipeX,
         y : changePipe + pipeHeight + (bgImage.height/4.8), //making the divisor bigger makes the gap smaller
         width : pipeWidth,
-        height : pipeHeight,
-        point : false
+        height : pipeHeight
     } 
     pipesArray.push(bottomPipe);
 
@@ -118,9 +119,6 @@ let floor = {
     width : floorWidth,
     height : floorHeight
 }
-
-//skybox
-
 
 window.onload = function() {
     //Drawing the background
@@ -178,16 +176,26 @@ function animate() {
         pipe.x += velocityPipe;
         context.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
 
+        if ((pipe.point === false) && (fBird.x > pipe.x + pipe.width)) {
+            score += 1;
+            pipe.point = true;
+        }
+
         if (collision(fBird, pipe)) {
             gameOver = true;
         }
     }
+
+    context.fillStyle = "black";
+    context.font="45px sans-serif";
+    context.fillText(score, 5, 45);
 
     //Redraw floor
     context.drawImage(floorImg, floor.x, floor.y, floor.width, floor.height);
     if (collision(fBird, floor)) {
         gameOver = true;
     }
+    
     
 }
 
@@ -203,6 +211,9 @@ function resetGame() {
         fBird.y = fBirdY;
         pipesArray = [];
         gameOver = false;
+        birdVelocity = 0;
+        score = 0;
         requestAnimationFrame(animate);
     }
 }
+
