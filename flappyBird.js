@@ -147,6 +147,7 @@ window.onload = function() {
 
     bottomPipeImg = new Image();
     bottomPipeImg.src = "./bottomPipe.png";
+    
 
     requestAnimationFrame(animate);
     
@@ -188,7 +189,7 @@ function animate() {
 
     context.fillStyle = "black";
     context.font="45px sans-serif";
-    context.fillText(score, 5, 45);
+    context.fillText(score, 142, 45);
 
     //Redraw floor
     context.drawImage(floorImg, floor.x, floor.y, floor.width, floor.height);
@@ -196,6 +197,10 @@ function animate() {
         gameOver = true;
     }
     
+    if (gameOver === true) {
+        context.font="40px sans-serif";
+        context.fillText("Game Over", 45, 256);
+    }
     
 }
 
