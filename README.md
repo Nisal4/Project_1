@@ -18,7 +18,7 @@ The game over screen. You will be seeing that a lot.
 For this project we were supposed to use DOM manipulation and not canvas, however I didn't realize this so I ended up using canvas. I'm not great at CSS nor do I enjoy it, but I do like Javascript, so I stuck mainly with that. I didn't really have any code in either my HTML or my CSS, and rather did everything in Javascript. I even added the canvas using DOM manipulation. Otherwise all the functions, images, and text displays were done through Javascript. This game also required many loops and functions that regularly had to be embedded into each other. It was frustrating at times to figure out what I was doing because we haven't really gone over canvas yet, however I enjoyed the challenege.
 
 
-Challenging Code Parts
+# Challenging Code
 
 ![image_2023-10-13_094956079](https://github.com/Nisal4/Project_1/assets/145291849/9080084b-9e92-4a36-a129-b0416b52980e)
 
